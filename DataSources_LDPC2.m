@@ -1,14 +1,14 @@
-clc;
+% clc;
 % clear all;
-
+% 
 % NFFT = 512;         % FFT length
 % G = 212;            % Guard interval length
 % M_ary = 64;         % Multilevel of M_ary symbol
 % t_a = 130.2e-9;    
 % symbol_duration = NFFT*t_a;
 % NofOFDMSymbols =10;
-% NofMs = 5;
-% length_data = NFFT*NofOFDMSymbols;
+% NofMs = 1;
+length_data = NFFT*NofOFDMSymbols;
         
 Data_Frame1 = [];
 Data_Frame2 = [];

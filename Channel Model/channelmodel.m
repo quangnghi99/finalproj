@@ -11,15 +11,13 @@ clc; clear; close;
 load Parameter_test.mat
 
 % Carrier frequency in GHz (0.3-10 THz)
-f = 300; freq = num2str(f);
+f = 350; freq = num2str(f);
 % Wave lenght
 lambda= c/(f*1e9);
 % Transmit antenna spacing in wavelengths (0.1-100)
-for aa = 1:150
-    for bb = 1:150
-dTx = aa*0.1 * c /(325*1e9);
+dTx = 0.5 * c /(325*1e9);
 % Receive antenna spacing in wavelengths (0.1-100)
-dRx = 0.1*bb * c /(325*1e9);
+dRx = 0.5 * c /(325*1e9);
 
 %% ------------------------------------------------------------------------
 %
@@ -64,9 +62,9 @@ end
 
 %% Initial time
 t = 0; p = 1; q = 1;i = 1; Ctp = p;Crq = q;a = 0;
-delta_t = 2.6665e-04;delta_f = 0; delta_p=0; delta_q=0;
+delta_t = 0.001;delta_f = 0; delta_p=0; delta_q=0;
 % number of snapshot
-NofS=20;
+NofS=200;
 % number of cluster
 number_cluster = zeros(Mt,Mr,40);
 number_cluster(p,q,i) = N;
@@ -276,6 +274,19 @@ for i = 2:NofS
         end
     end
 end
-    cor(aa,bb)= real(h{1,1,2}*conj(h{2,2,2}));
+p=1;q=1;nf=1;
+time=linspace(0,delta_t*NofS,NofS-1);
+for i=1:NofS-1
+    sum_corr=0;
+    n=1;nn=1;
+    for m = 1:number_ray{p,q,i}(n,nf)
+        for mm=1:number_ray{p,q,i+1}(nn,nf)
+            sigma2=f*1e9*(to_nm{p,q,i}(m,n)-to_nm{p,q,i+1}(mm,nn));
+            sum_corr= sum_corr + P_remain_f*h_nlos{p,q,i}(m,n,nf)*conj(h_nlos{p,q,i+1}(mm,nn,nf))*exp(2j*pi*sigma2);
+        end
     end
+    corr_nlos(i)=abs(real(sum_corr));
 end
+% plot(time,corr_nlos,'b-.');
+cd('ACF')
+save 350ghz.mat corr_nlos NofS

@@ -2,11 +2,11 @@ clc;
 clear all;
 %==========================================================================
 % Main program
-NFFT = 256;         % FFT length
+NFFT = 512;         % FFT length
 G = 212;            % Guard interval length
 M_ary = 64;         % Multilevel of M_ary symbol
 t_a = 130.2e-9;     
-NofOFDMSymbols = 14;            %Number of data and pilot OFDM symbol
+NofOFDMSymbols = 10;            %Number of data and pilot OFDM symbol
 itr = 9;
 fD = 70;
 
@@ -29,20 +29,20 @@ NofMs = 1;
 %==========================================================================
 % Source Data
 %
-load DataSources_test.mat
+load DataSources_test2.mat
 
 %==========================================================================
 % Channel Coefficients
 %
-load channel_coeff.mat
+load channel_coeff_test2.mat
 
 %==========================================================================
 % Channel Allocation
 %
-load mask_test.mat
+load mask_test2.mat
 %==========================================================================
 % LDPC
-load data_test.mat
+load data_test2.mat
 load base_graph_1_check_node_list
 base_graph_check_node_list = base_graph_1_check_node_list;
 TxRx.Decoder.LDPC.Iterations = 3;
@@ -275,10 +275,10 @@ for snr = snr_min:step:snr_max
 end  
 psnr = snr_min:step:snr_max;
 % save user\SFBC_20user.mat psnr  SER;
-semilogy(psnr, SER,'bo-','Color','blue');
-hold on;
-semilogy(psnr, SER1,'*-','Color','red');
-xlabel('SNR in dB');
-ylabel('SER');
-grid on;
-hold on;
+% semilogy(psnr, SER,'bo-','Color','blue');
+% hold on;
+% semilogy(psnr, SER1,'*-','Color','red');
+% xlabel('SNR in dB');
+% ylabel('SER');
+% grid on;
+% hold on;

@@ -1,11 +1,11 @@
-clc; 
-clear all;
+% clc; 
+% clear all;
 
-NofOFDMSymbols = 14;
-NFFT = 256;
-NofMs = 1;
+NofOFDMSymbols = 10;
+NFFT = 512;
+NofMs = 50;
 
-load channel_coeff.mat;
+load channel_coeff_test2.mat;
 N_data = ceil(NFFT/NofMs);
 count = zeros(1,NofMs);
 for i = 1:NofOFDMSymbols

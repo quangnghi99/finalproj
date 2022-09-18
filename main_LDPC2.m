@@ -1,12 +1,12 @@
-%clc;
+% clc;
 % clear all;
 %==========================================================================
 % Main program
 % NFFT = 512;         % FFT length
 % G = 212;            % Guard interval length
 % M_ary = 64;         % Multilevel of M_ary symbol
-%t_a = 130.2e-9;     
-%NofOFDMSymbols = 10;            %Number of data and pilot OFDM symbol
+% t_a = 130.2e-9;     
+% NofOFDMSymbols = 10;            %Number of data and pilot OFDM symbol
 % itr = 9;
 % fD = 70;
 
@@ -23,7 +23,7 @@ step = 2.0;
 SER=[];
 SER1 = [];
 NT = 5;
-% NofMs = 5;
+% NofMs = 1;
 
 
 %==========================================================================
@@ -49,7 +49,7 @@ TxRx.Decoder.LDPC.Iterations = 3;
 %==========================================================================
 % Main loop
 %==========================================================================
-for snr = snr_min:step:snr_max;
+for snr = snr_min:step:snr_max
 
      SER_t=0;
      SER1_t=0;
@@ -88,7 +88,7 @@ for snr = snr_min:step:snr_max;
            
             
             clear OFDM_signal_tem11 OFDM_signal_tem12;
-        end;
+        end
 
         %------------------------------------------------------------------------
         % Transmitted signal of antenna 2 to receive antenna 1 (channel: h21)
